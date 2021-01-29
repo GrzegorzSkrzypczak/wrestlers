@@ -5,9 +5,9 @@ import pl.grzegorz.wrestlers.model.Wrestlers;
 import pl.grzegorz.wrestlers.model.WrestlersLibrary;
 
 public class WrestlersController {
-    private final int EXIT = 0;
-    private final int ADD_WRESTLER = 1;
-    private final int PRINT_WRESTLERS = 2;
+    private static final int EXIT = 0;
+    private static final int ADD_WRESTLER = 1;
+    private static final int PRINT_WRESTLERS = 2;
 
     private final DataReader dataReader = new DataReader();
     private final WrestlersLibrary wrestlersLibrary = new WrestlersLibrary();

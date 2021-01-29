@@ -3,7 +3,7 @@ package pl.grzegorz.wrestlers.model;
 import java.util.Arrays;
 
 public class WrestlersLibrary {
-    private final int maxWrestlers = 1000;
+    private static final int maxWrestlers = 1000;
     private Wrestlers[] allWrestlers = new Wrestlers[maxWrestlers];
     private int wretlersCount;
 
