@@ -1,7 +1,7 @@
 package pl.grzegorz.wrestlers.io;
 
+import pl.grzegorz.wrestlers.model.Referees;
 import pl.grzegorz.wrestlers.model.Wrestlers;
-
 import java.util.Scanner;
 
 public class DataReader {
@@ -18,10 +18,8 @@ public class DataReader {
     }
 
     public Wrestlers readAndCreateWrestler() {
-        System.out.println("Prawdziwe imię :");
+        System.out.println("Pseudonim:");
         String name = scanner.nextLine();
-        System.out.println("Imię Wrestlingowe: ");
-        String wrestlingName = scanner.nextLine();
         System.out.println("Organizacja: ");
         String organization = scanner.nextLine();
         System.out.println("Wiek: ");
@@ -33,6 +31,25 @@ public class DataReader {
         System.out.println("Tytuł mistrzowski: ");
         String championship = scanner.nextLine();
 
-        return new Wrestlers(name, wrestlingName, organization, age, isAChampion, championship);
+        return new Wrestlers(name, organization, age, isAChampion, championship);
+    }
+
+    public Referees readAndCreateReferees() {
+        System.out.println("Imię i nazwisko :");
+        String name = scanner.nextLine();
+        System.out.println("Organizacja: ");
+        String organization = scanner.nextLine();
+        System.out.println("Wiek: ");
+        int age = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Staż w federacji: ");
+        int yearsInCompany = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Przynależy do frakcji: ");
+        String brand = scanner.nextLine();
+        System.out.println("Płęć: ");
+        String gender = scanner.nextLine();
+
+        return new Referees(name, organization,age,yearsInCompany,brand,gender);
     }
 }
