@@ -1,6 +1,6 @@
 package pl.grzegorz.wrestlers.model;
 
-public class Company {
+class Company {
 
     private String organizationName;
     private int age;

@@ -9,9 +9,8 @@ public class Referees extends Company{
 
     public Referees(String name, String organizationName,
                     int age, int yearsInCompany, String brand, String gender) {
-        this.setOrganizationName(organizationName);
+        super(organizationName, age);
         this.name = name;
-        this.setAge(age);
         this.yearsInCompany = yearsInCompany;
         this.brand = brand;
         this.gender = gender;

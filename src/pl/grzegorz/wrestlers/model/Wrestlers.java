@@ -12,9 +12,8 @@ public class Wrestlers extends Company {
     }
 
     public Wrestlers(String wrestlingName, String organization, int age, boolean champion, String title) {
+        super(organization, age);
         this.wrestlingName = wrestlingName;
-        this.setOrganizationName(organization);
-        this.setAge(age);
         this.champion = champion;
         this.title = title;
     }
