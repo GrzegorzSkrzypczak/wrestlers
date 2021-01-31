@@ -1,16 +1,14 @@
 package pl.grzegorz.wrestlers.model;
 
-import java.util.Arrays;
-
 public class WrestlersLibrary {
 
-    private static final int maxSpace = 2000;
-    private Company[] company = new Company[maxSpace];
+    private static final int MAX_SPACE = 2000;
+    private Company[] company = new Company[MAX_SPACE];
     private int companySpace;
 
 
     public void addWrestler(Wrestlers wrestler){
-        if(companySpace < maxSpace){
+        if(companySpace < MAX_SPACE){
             company[companySpace] = wrestler;
             companySpace++;
         } else {
@@ -19,7 +17,7 @@ public class WrestlersLibrary {
     }
 
     public void addReferee (Referees refree){
-        if(companySpace < maxSpace){
+        if(companySpace < MAX_SPACE){
             company[companySpace] = refree;
             companySpace++;
         } else {
@@ -28,22 +26,28 @@ public class WrestlersLibrary {
     }
 
     public void printWrestlers(){
-        if(companySpace == 0) {
-            System.out.println("Brak wrestlerów w spisie");
-        }
-
+        int countWrestlers = 0;
         for (int i = 0; i < companySpace; i++) {
-            System.out.println(Arrays.toString(company));
+            if(company[i] instanceof Wrestlers){
+                System.out.println(company[i]);
+                countWrestlers++;
+            }
+        }
+        if (countWrestlers == 0) {
+            System.out.println("Brak wrestlerów w bibliotece");
         }
     }
 
-    public void printReferee(){
-        if(companySpace == 0) {
-            System.out.println("Brak sędziów w spisie");
-        }
-
+    public void printReferee() {
+        int countReferees = 0;
         for (int i = 0; i < companySpace; i++) {
-            System.out.println(Arrays.toString(company));
+            if (company[i] instanceof Referees) {
+                System.out.println(company[i]);
+                countReferees++;
+            }
+        }
+        if (countReferees == 0) {
+            System.out.println("Brak sędziów w bibliotece");
         }
     }
 

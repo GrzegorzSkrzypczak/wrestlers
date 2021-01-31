@@ -57,10 +57,9 @@ public class Wrestlers extends Company {
 
     @Override
     public String toString() {
-        return "Wrestlers: " + "\n"
+        return "Wrestler: " + "\n"
                 + ", pseudonim: " + wrestlingName + "\n"
-                + ", organizacja: " + getOrganizationName() + "\n"
-                + ", wiek: " + getAge() + "\n"
+                + super.toString() + "\n"
                 + ", czy posiada jakiś tytuł mistrzowski: " + champion + "\n"
                 + ", nazwa posiadanego tytułu mistrzowskiego: " + title + "\n" + "\n";
     }

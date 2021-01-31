@@ -1,5 +1,7 @@
 package pl.grzegorz.wrestlers.model;
 
+import java.util.Objects;
+
 public class Referees extends Company{
 
     private String name;
@@ -51,12 +53,25 @@ public class Referees extends Company{
 
     @Override
     public String toString() {
-        return "Sędziowie: " + "\n"
+        return "Sędzia: " + "\n"
                 + "imię / ksywa : " + name + "\n"
-                + ", organizacja: " + getOrganizationName() + "\n"
-                + ", wiek: " + getAge() + "\n"
+                + super.toString() + "\n"
                 + ", staż: " + yearsInCompany + "\n"
                 + ", frakcja: " + brand + "\n"
                 + ", płęć: " + gender + "\n" + "\n";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Referees referees = (Referees) o;
+        return yearsInCompany == referees.yearsInCompany && Objects.equals(name, referees.name) && Objects.equals(brand, referees.brand) && Objects.equals(gender, referees.gender);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), name, yearsInCompany, brand, gender);
     }
 }

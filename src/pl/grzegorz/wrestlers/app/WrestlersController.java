@@ -6,22 +6,16 @@ import pl.grzegorz.wrestlers.model.Wrestlers;
 import pl.grzegorz.wrestlers.model.WrestlersLibrary;
 
 public class WrestlersController {
-    private static final int EXIT = 0;
-    private static final int ADD_WRESTLER = 1;
-    private static final int ADD_REFEREE = 2;
-    private static final int PRINT_WRESTLERS = 3;
-    private static final int PRINT_REFEREES = 4;
-
 
     private final DataReader dataReader = new DataReader();
     private final WrestlersLibrary wrestlersLibrary = new WrestlersLibrary();
 
     public void control() {
-        int option;
+        Options option;
 
         do {
             printOptions();
-            option = dataReader.getInt();
+            option = Options.createFromInt(dataReader.getInt());
             switch (option) {
                 case ADD_WRESTLER:
                     addWrestler();
@@ -29,10 +23,10 @@ public class WrestlersController {
                 case ADD_REFEREE:
                     addReferee();
                     break;
-                case PRINT_WRESTLERS:
+                case PRINT_WRESTLER:
                     printWrestlers();
                     break;
-                case PRINT_REFEREES:
+                case PRINT_REFEREE:
                     printReferees();
                     break;
                 case EXIT:
@@ -41,16 +35,14 @@ public class WrestlersController {
                 default:
                     System.out.println("Nie ma takiej opcji, wybierz ponownie!");
             }
-        } while (option != EXIT);
+        } while (option != Options.EXIT);
     }
 
     private void printOptions() {
         System.out.println("Wybierz opcję: ");
-        System.out.println(EXIT + " - Wyjście z programu.");
-        System.out.println(ADD_WRESTLER + " - Dodaj wrestlera.");
-        System.out.println(ADD_REFEREE + " - Dodaj sędziego.");
-        System.out.println(PRINT_WRESTLERS + " - Wyświetl wrestlerów.");
-        System.out.println(PRINT_REFEREES + " - Wyświetl sędziów.");
+        for(Options option: Options.values()){
+            System.out.println(option);
+        }
     }
 
     private void addWrestler() {
