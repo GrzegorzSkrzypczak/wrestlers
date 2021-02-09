@@ -1,8 +1,9 @@
 package pl.grzegorz.wrestlers.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class Company {
+public abstract class Company implements Serializable {
 
     private String organizationName;
     private int age;

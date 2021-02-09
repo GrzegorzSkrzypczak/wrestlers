@@ -12,18 +12,6 @@ public class DataReader {
         this.printer = printer;
     }
 
-    public void close() {
-        scanner.close();
-    }
-
-    public int getInt() {
-        try {
-            return scanner.nextInt();
-        } finally {
-            scanner.nextLine();
-        }
-    }
-
     public Wrestlers readAndCreateWrestler() {
         printer.printLine("Pseudonim:");
         String name = scanner.nextLine();
@@ -31,7 +19,6 @@ public class DataReader {
         String organization = scanner.nextLine();
         printer.printLine("Wiek: ");
         int age = getInt();
-        scanner.nextLine();
         printer.printLine("Czy posiada pas: ");
         boolean isAChampion = scanner.nextBoolean();
         scanner.nextLine();
@@ -48,15 +35,29 @@ public class DataReader {
         String organization = scanner.nextLine();
         printer.printLine("Wiek: ");
         int age = getInt();
-        scanner.nextLine();
         printer.printLine("Staż w federacji: ");
         int yearsInCompany = getInt();
-        scanner.nextLine();
         printer.printLine("Przynależy do frakcji: ");
         String brand = scanner.nextLine();
         printer.printLine("Płęć: ");
         String gender = scanner.nextLine();
 
         return new Referees(name, organization,age,yearsInCompany,brand,gender);
+    }
+
+    public String getString() {
+       return scanner.nextLine();
+    }
+
+    public int getInt() {
+        try {
+            return scanner.nextInt();
+        } finally {
+            scanner.nextLine();
+        }
+    }
+
+    public void close() {
+        scanner.close();
     }
 }

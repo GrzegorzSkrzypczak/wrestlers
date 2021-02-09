@@ -1,8 +1,12 @@
 package pl.grzegorz.wrestlers.app;
 
+import pl.grzegorz.wrestlers.exceptions.DataExportException;
+import pl.grzegorz.wrestlers.exceptions.DataImportException;
 import pl.grzegorz.wrestlers.exceptions.NoSuchOptionException;
 import pl.grzegorz.wrestlers.io.ConsolePrinter;
 import pl.grzegorz.wrestlers.io.DataReader;
+import pl.grzegorz.wrestlers.io.file.FileMenager;
+import pl.grzegorz.wrestlers.io.file.FileMenagerBuilder;
 import pl.grzegorz.wrestlers.model.Company;
 import pl.grzegorz.wrestlers.model.Referees;
 import pl.grzegorz.wrestlers.model.Wrestlers;
@@ -12,12 +16,24 @@ import java.util.InputMismatchException;
 
 public class WrestlersController {
 
-    private ConsolePrinter printer = new ConsolePrinter();
+    private final ConsolePrinter printer = new ConsolePrinter();
     private final DataReader dataReader = new DataReader(printer);
-    private final WrestlersLibrary wrestlersLibrary = new WrestlersLibrary();
+    private WrestlersLibrary wrestlersLibrary;
+    private FileMenager fileMenager;
 
+     WrestlersController() {
+        fileMenager = new FileMenagerBuilder(printer, dataReader).build();
+        try {
+            wrestlersLibrary = fileMenager.importData();
+            printer.printLine("Zaimportowano dane z pliku.");
+        }catch (DataImportException e) {
+            printer.printLine(e.getMessage());
+            printer.printLine("Zainicjowano nową bazę!");
+            wrestlersLibrary =  new WrestlersLibrary();
+        }
+    }
 
-    public void control() {
+    void control() {
         Options option;
 
         do {
@@ -103,6 +119,12 @@ public class WrestlersController {
     }
 
     private void exit() {
+         try {
+         fileMenager.exportData(wrestlersLibrary);
+         printer.printLine("Export danych do pliku zakończony powodzeniem.");
+         } catch (DataExportException e) {
+             printer.printLine(e.getMessage());
+         }
         printer.printLine("Koniec programu.");
         dataReader.close();
     }

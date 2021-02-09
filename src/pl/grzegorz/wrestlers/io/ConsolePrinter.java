@@ -4,14 +4,12 @@ import pl.grzegorz.wrestlers.model.Company;
 import pl.grzegorz.wrestlers.model.Referees;
 import pl.grzegorz.wrestlers.model.Wrestlers;
 
-import java.util.Locale;
-
 public class ConsolePrinter {
 
-    public void printWrestlers(Company[] printWrestlers){
+    public void printWrestlers(Company[] printWrestlers) {
         int countWrestlers = 0;
         for (Company wrestlers : printWrestlers) {
-            if(wrestlers instanceof Wrestlers){
+            if (wrestlers instanceof Wrestlers) {
                 System.out.println(wrestlers);
                 countWrestlers++;
             }

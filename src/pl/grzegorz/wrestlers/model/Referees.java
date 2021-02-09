@@ -58,7 +58,7 @@ public class Referees extends Company{
                 + super.toString() + "\n"
                 + " staż: " + yearsInCompany + "\n"
                 + " frakcja: " + brand + "\n"
-                + " płęć: " + gender + "\n" + "\n";
+                + " płęć: " + gender + "\n";
     }
 
     @Override

@@ -1,6 +1,8 @@
 package pl.grzegorz.wrestlers.model;
 
-public class WrestlersLibrary {
+import java.io.Serializable;
+
+public class WrestlersLibrary implements Serializable {
 
     private static final int MAX_SPACE = 2000;
     private Company[] company = new Company[MAX_SPACE];

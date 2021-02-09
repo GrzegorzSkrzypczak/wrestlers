@@ -61,6 +61,6 @@ public class Wrestlers extends Company {
                 + " pseudonim: " + wrestlingName + "\n"
                 + super.toString() + "\n"
                 + " czy posiada jakiś tytuł mistrzowski: " + champion + "\n"
-                + " nazwa posiadanego tytułu mistrzowskiego: " + title + "\n" + "\n";
+                + " nazwa posiadanego tytułu mistrzowskiego: " + title + "\n";
     }
 }
