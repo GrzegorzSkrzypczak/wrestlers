@@ -2,7 +2,7 @@ package pl.grzegorz.wrestlers.model;
 
 import java.util.Objects;
 
-class Company {
+public class Company {
 
     private String organizationName;
     private int age;
@@ -36,7 +36,7 @@ class Company {
     public String toString() {
         return "Organizacja: " + "\n"
                 + "nazwa organizacji: " + organizationName + "\n"
-                + ", wiek: " + age;
+                + " wiek: " + age;
     }
 
     @Override

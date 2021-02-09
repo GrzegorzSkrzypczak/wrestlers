@@ -1,5 +1,7 @@
 package pl.grzegorz.wrestlers.app;
 
+import pl.grzegorz.wrestlers.exceptions.NoSuchOptionException;
+
 enum Options {
 
     EXIT(0, "Wyjście z programu"),
@@ -32,7 +34,12 @@ enum Options {
         return value + " - " + description;
     }
 
-    static Options createFromInt(int option) {
-        return Options.values()[option];
+    static Options createFromInt(int option) throws NoSuchOptionException {
+        try {
+            return Options.values()[option];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new NoSuchOptionException("Brak opcji o id " + option);
+        }
+
     }
 }

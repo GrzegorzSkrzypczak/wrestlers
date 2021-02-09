@@ -56,9 +56,9 @@ public class Referees extends Company{
         return "Sędzia: " + "\n"
                 + "imię / ksywa : " + name + "\n"
                 + super.toString() + "\n"
-                + ", staż: " + yearsInCompany + "\n"
-                + ", frakcja: " + brand + "\n"
-                + ", płęć: " + gender + "\n" + "\n";
+                + " staż: " + yearsInCompany + "\n"
+                + " frakcja: " + brand + "\n"
+                + " płęć: " + gender + "\n" + "\n";
     }
 
     @Override

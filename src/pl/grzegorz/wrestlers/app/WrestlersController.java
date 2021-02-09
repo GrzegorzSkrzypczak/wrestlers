@@ -1,21 +1,28 @@
 package pl.grzegorz.wrestlers.app;
 
+import pl.grzegorz.wrestlers.exceptions.NoSuchOptionException;
+import pl.grzegorz.wrestlers.io.ConsolePrinter;
 import pl.grzegorz.wrestlers.io.DataReader;
+import pl.grzegorz.wrestlers.model.Company;
 import pl.grzegorz.wrestlers.model.Referees;
 import pl.grzegorz.wrestlers.model.Wrestlers;
 import pl.grzegorz.wrestlers.model.WrestlersLibrary;
 
+import java.util.InputMismatchException;
+
 public class WrestlersController {
 
-    private final DataReader dataReader = new DataReader();
+    private ConsolePrinter printer = new ConsolePrinter();
+    private final DataReader dataReader = new DataReader(printer);
     private final WrestlersLibrary wrestlersLibrary = new WrestlersLibrary();
+
 
     public void control() {
         Options option;
 
         do {
             printOptions();
-            option = Options.createFromInt(dataReader.getInt());
+            option = getOption();
             switch (option) {
                 case ADD_WRESTLER:
                     addWrestler();
@@ -33,41 +40,71 @@ public class WrestlersController {
                     exit();
                     break;
                 default:
-                    System.out.println("Nie ma takiej opcji, wybierz ponownie!");
+                    printer.printLine("Nie ma takiej opcji, wybierz ponownie!");
             }
         } while (option != Options.EXIT);
     }
 
+    private Options getOption() {
+        boolean optionOk = false;
+        Options options = null;
+
+        while (!optionOk){
+            try {
+                options = Options.createFromInt(dataReader.getInt());
+                optionOk = true;
+            } catch (NoSuchOptionException e) {
+                printer.printLine(e.getMessage());
+            } catch (InputMismatchException e) {
+                printer.printLine("Wprowadzono wartość która nie jest liczbą, podaj liczbę: ");
+            }
+        }
+        return options;
+    }
+
     private void printOptions() {
-        System.out.println("Wybierz opcję: ");
+        printer.printLine("Wybierz opcję: ");
         for(Options option: Options.values()){
-            System.out.println(option);
+            printer.printLine(option.toString());
         }
     }
 
     private void addWrestler() {
-        Wrestlers wrestler = dataReader.readAndCreateWrestler();
-        wrestlersLibrary.addWrestler(wrestler);
+        try {
+            Wrestlers wrestler = dataReader.readAndCreateWrestler();
+            wrestlersLibrary.addWrestler(wrestler);
+        } catch (InputMismatchException e) {
+            printer.printLine("Nie udało się dodać wrestlera, spróbuj ponownie!");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            printer.printLine("Brak miejsca na zapis wrestlera!");
+        }
     }
 
     private void addReferee() {
-        Referees referees = dataReader.readAndCreateReferees();
-        wrestlersLibrary.addReferee(referees);
+        try {
+            Referees referees = dataReader.readAndCreateReferees();
+            wrestlersLibrary.addReferee(referees);
+        } catch (InputMismatchException e) {
+            printer.printLine("Nie udało się dodać sędziego, spróbuj ponownie!");
+        }  catch (ArrayIndexOutOfBoundsException e) {
+        printer.printLine("Brak miejsca na zapis sędziego!");
+    }
 
     }
 
     private void printWrestlers() {
-        wrestlersLibrary.printWrestlers();
+        Company[] wrestlers = wrestlersLibrary.getCompany();
+        printer.printWrestlers(wrestlers);
     }
 
     private void printReferees() {
-        wrestlersLibrary.printReferee();
+        Company[] referees = wrestlersLibrary.getCompany();
+        printer.printReferee(referees);
     }
 
     private void exit() {
-        System.out.println("Koniec programu.");
+        printer.printLine("Koniec programu.");
         dataReader.close();
     }
-
 
 }
