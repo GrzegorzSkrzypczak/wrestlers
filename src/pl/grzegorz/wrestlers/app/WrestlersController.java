@@ -2,6 +2,7 @@ package pl.grzegorz.wrestlers.app;
 
 import pl.grzegorz.wrestlers.exceptions.DataExportException;
 import pl.grzegorz.wrestlers.exceptions.DataImportException;
+import pl.grzegorz.wrestlers.exceptions.InvalidDataException;
 import pl.grzegorz.wrestlers.exceptions.NoSuchOptionException;
 import pl.grzegorz.wrestlers.io.ConsolePrinter;
 import pl.grzegorz.wrestlers.io.DataReader;
@@ -26,7 +27,7 @@ public class WrestlersController {
         try {
             wrestlersLibrary = fileMenager.importData();
             printer.printLine("Zaimportowano dane z pliku.");
-        }catch (DataImportException e) {
+        }catch (DataImportException | InvalidDataException e) {
             printer.printLine(e.getMessage());
             printer.printLine("Zainicjowano nową bazę!");
             wrestlersLibrary =  new WrestlersLibrary();
@@ -88,7 +89,7 @@ public class WrestlersController {
     private void addWrestler() {
         try {
             Wrestlers wrestler = dataReader.readAndCreateWrestler();
-            wrestlersLibrary.addWrestler(wrestler);
+            wrestlersLibrary.addEmployees(wrestler);
         } catch (InputMismatchException e) {
             printer.printLine("Nie udało się dodać wrestlera, spróbuj ponownie!");
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -99,7 +100,7 @@ public class WrestlersController {
     private void addReferee() {
         try {
             Referees referees = dataReader.readAndCreateReferees();
-            wrestlersLibrary.addReferee(referees);
+            wrestlersLibrary.addEmployees(referees);
         } catch (InputMismatchException e) {
             printer.printLine("Nie udało się dodać sędziego, spróbuj ponownie!");
         }  catch (ArrayIndexOutOfBoundsException e) {

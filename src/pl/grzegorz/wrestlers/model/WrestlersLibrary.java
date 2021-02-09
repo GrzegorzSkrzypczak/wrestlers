@@ -16,15 +16,7 @@ public class WrestlersLibrary implements Serializable {
         return result;
     }
 
-    public void addWrestler(Wrestlers wrestler) {
-        addEmployees(wrestler);
-    }
-
-    public void addReferee(Referees refree) {
-        addEmployees(refree);
-    }
-
-    private void addEmployees(Company employees) {
+    public void addEmployees(Company employees) {
         if (companySpace >= MAX_SPACE) {
             throw new ArrayIndexOutOfBoundsException("No more space in database to save wrestler or referee!" + MAX_SPACE);
         }

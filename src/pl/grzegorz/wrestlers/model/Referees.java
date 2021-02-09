@@ -2,8 +2,9 @@ package pl.grzegorz.wrestlers.model;
 
 import java.util.Objects;
 
-public class Referees extends Company{
+public class Referees extends Company {
 
+    public static final String TYPE = "Sędzia";
     private String name;
     private int yearsInCompany;
     private String brand;
@@ -59,6 +60,17 @@ public class Referees extends Company{
                 + " staż: " + yearsInCompany + "\n"
                 + " frakcja: " + brand + "\n"
                 + " płęć: " + gender + "\n";
+    }
+
+    @Override
+    public String toCsv() {
+        return TYPE + ";"
+                + getOrganizationName() + ";"
+                + name + ";"
+                + getAge() + ";"
+                + yearsInCompany + ";"
+                + gender+ ";"
+                + brand;
     }
 
     @Override

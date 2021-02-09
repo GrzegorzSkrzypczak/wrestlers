@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Wrestlers extends Company {
 
+    public static final String TYPE = "Wrestler";
     private String wrestlingName;
     private boolean champion;
     private String title;
@@ -62,5 +63,15 @@ public class Wrestlers extends Company {
                 + super.toString() + "\n"
                 + " czy posiada jakiś tytuł mistrzowski: " + champion + "\n"
                 + " nazwa posiadanego tytułu mistrzowskiego: " + title + "\n";
+    }
+
+    @Override
+    public String toCsv() {
+        return TYPE + ";"
+                + getOrganizationName() + ";"
+                + wrestlingName + ";"
+                + getAge() + ";"
+                + champion + ";"
+                + title;
     }
 }

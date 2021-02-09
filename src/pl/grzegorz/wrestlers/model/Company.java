@@ -40,6 +40,8 @@ public abstract class Company implements Serializable {
                 + " wiek: " + age;
     }
 
+    public abstract String toCsv();
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
