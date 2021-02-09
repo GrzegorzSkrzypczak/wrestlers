@@ -2,7 +2,7 @@ package pl.grzegorz.wrestlers.model;
 
 import java.util.Objects;
 
-public class Company {
+public abstract class Company {
 
     private String organizationName;
     private int age;
