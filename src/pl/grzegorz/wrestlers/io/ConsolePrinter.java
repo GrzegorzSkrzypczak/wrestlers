@@ -1,16 +1,19 @@
 package pl.grzegorz.wrestlers.io;
 
 import pl.grzegorz.wrestlers.model.Company;
+import pl.grzegorz.wrestlers.model.LibraryUser;
 import pl.grzegorz.wrestlers.model.Referees;
 import pl.grzegorz.wrestlers.model.Wrestlers;
 
+import java.util.Collection;
+
 public class ConsolePrinter {
 
-    public void printWrestlers(Company[] printWrestlers) {
+    public void printWrestlers(Collection<Company> printWrestlers) {
         int countWrestlers = 0;
         for (Company wrestlers : printWrestlers) {
             if (wrestlers instanceof Wrestlers) {
-                System.out.println(wrestlers);
+                printLine(wrestlers.toString());
                 countWrestlers++;
             }
         }
@@ -19,11 +22,11 @@ public class ConsolePrinter {
         }
     }
 
-    public void printReferee(Company[] printReferees) {
+    public void printReferee(Collection<Company> printReferees) {
         int countReferees = 0;
         for (Company referees : printReferees) {
             if (referees instanceof Referees) {
-                System.out.println(referees);
+                printLine(referees.toString());
                 countReferees++;
             }
         }
@@ -32,8 +35,17 @@ public class ConsolePrinter {
         }
     }
 
+    public void printUsers (Collection<LibraryUser> printUsers){
+        int countUsers = 0;
+        for (LibraryUser users : printUsers) {
+            printLine(users.toString());
+        }
+
+    }
+
     public void printLine(String text) {
         System.out.println(text.toUpperCase());
     }
 
+    // TODO zmiana koncepcli + poprawić kolejnosc wyswietlania!
 }

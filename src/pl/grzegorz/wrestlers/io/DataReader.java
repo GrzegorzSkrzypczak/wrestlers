@@ -1,5 +1,6 @@
 package pl.grzegorz.wrestlers.io;
 
+import pl.grzegorz.wrestlers.model.LibraryUser;
 import pl.grzegorz.wrestlers.model.Referees;
 import pl.grzegorz.wrestlers.model.Wrestlers;
 import java.util.Scanner;
@@ -43,6 +44,18 @@ public class DataReader {
         String gender = scanner.nextLine();
 
         return new Referees(name, organization,age,yearsInCompany,brand,gender);
+    }
+
+    public LibraryUser createUser(){
+        printer.printLine("Podaj id: ");
+        int id =  getInt();
+        printer.printLine("Podaj imię: ");
+        String name = scanner.nextLine();
+        printer.printLine("Podaj Nazwisko: ");
+        String lastName = scanner.nextLine();
+        return new LibraryUser(id, name, lastName);
+
+
     }
 
     public String getString() {

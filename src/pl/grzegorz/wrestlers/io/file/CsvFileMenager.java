@@ -3,31 +3,56 @@ package pl.grzegorz.wrestlers.io.file;
 import pl.grzegorz.wrestlers.exceptions.DataExportException;
 import pl.grzegorz.wrestlers.exceptions.DataImportException;
 import pl.grzegorz.wrestlers.exceptions.InvalidDataException;
-import pl.grzegorz.wrestlers.model.Company;
-import pl.grzegorz.wrestlers.model.Referees;
-import pl.grzegorz.wrestlers.model.Wrestlers;
-import pl.grzegorz.wrestlers.model.WrestlersLibrary;
+import pl.grzegorz.wrestlers.model.*;
 
 import java.io.*;
+import java.util.Collection;
+import java.util.Map;
 import java.util.Scanner;
 
 public class CsvFileMenager implements FileMenager {
 
     private static final String FILE_NAME = "WrestlingLibrary.csv";
+    private static final String USERS_FILE_NAME = "Users.csv";
 
     @Override
     public WrestlersLibrary importData() {
         WrestlersLibrary employeeLibrary = new WrestlersLibrary();
+        inportCompany(employeeLibrary);
+        importUsers(employeeLibrary);
+        return employeeLibrary;
+    }
+
+    private void importUsers(WrestlersLibrary employeeLibrary) {
+        try (Scanner fileReader = new Scanner(new File(USERS_FILE_NAME))) {
+            while(fileReader.hasNext()) {
+                String nextLine = fileReader.nextLine();
+                LibraryUser users = createUserFromString(nextLine);
+                employeeLibrary.addUser(users);
+            }
+        } catch (FileNotFoundException e) {
+            throw new DataImportException("Brak pliku " + USERS_FILE_NAME);
+        }
+    }
+
+    private LibraryUser createUserFromString(String csvTxt) {
+        String[] split = csvTxt.split(";");
+        int id = Integer.valueOf(split[0]);
+        String name = split[1];
+        String lastName = split[2];
+        return new LibraryUser(id, name, lastName);
+    }
+
+    private void inportCompany(WrestlersLibrary library) {
         try (Scanner fileReader = new Scanner(new File(FILE_NAME))) {
             while(fileReader.hasNext()) {
                 String nextLine = fileReader.nextLine();
                 Company employee = createObjectFromString(nextLine);
-                employeeLibrary.addEmployees(employee);
+                library.addEmployees(employee);
             }
         } catch (FileNotFoundException e) {
             throw new DataImportException("Brak pliku " + FILE_NAME);
         }
-        return employeeLibrary;
     }
 
     private Company createObjectFromString(String nextLine) {
@@ -63,7 +88,13 @@ public class CsvFileMenager implements FileMenager {
 
     @Override
     public void exportData(WrestlersLibrary wrestlersLibrary) {
-        Company[] employees = wrestlersLibrary.getCompany();
+        exportWrestlers(wrestlersLibrary);
+        exportUsers(wrestlersLibrary);
+
+    }
+
+    public void exportWrestlers(WrestlersLibrary library){
+        Collection<Company> employees = library.getCompany().values();
         try (
                 FileWriter fileWriter = new FileWriter(FILE_NAME);
                 BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
@@ -73,6 +104,20 @@ public class CsvFileMenager implements FileMenager {
             }
         } catch (IOException e) {
             throw new DataExportException("Błąd zapisu danych do pliku " + FILE_NAME);
+        }
+    }
+
+    public void exportUsers (WrestlersLibrary library) {
+        Collection<LibraryUser> libraryUsers = library.getUsers().values();
+        try (
+                FileWriter fileWriter = new FileWriter(USERS_FILE_NAME);
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
+            for (LibraryUser users : libraryUsers) {
+                bufferedWriter.write(users.toCsv());
+                bufferedWriter.newLine();
+            }
+        } catch (IOException e) {
+            throw new DataExportException("Błąd zapisu danych do pliku " + USERS_FILE_NAME);
         }
     }
 }

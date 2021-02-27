@@ -1,49 +1,47 @@
 package pl.grzegorz.wrestlers.model;
 
+import pl.grzegorz.wrestlers.exceptions.EmployeeAlreadyExistsException;
+import pl.grzegorz.wrestlers.exceptions.UserAllreadyExistsException;
+
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class WrestlersLibrary implements Serializable {
 
-    private static final int CAPACITY = 1;
-    private Company[] company = new Company[CAPACITY];
-    private int companySpace = 0;
+    private Map<String, Company> company = new HashMap<>();
+    private Map<Integer, LibraryUser> users = new HashMap<>();
 
-    public Company[] getCompany() {
-        Company[] result = new Company[companySpace];
-        for (int i = 0; i < result.length; i++) {
-            result[i] = company[i];
-        }
-        return result;
+    public Map<String, Company> getCompany() {
+        return company;
     }
 
-    public void addEmployees(Company employees) {
-        if (companySpace == company.length) {
-            company = Arrays.copyOf(company, company.length * 2);
+    public Map<Integer, LibraryUser> getUsers() {
+        return users;
+    }
+
+
+    public void addEmployees(Company organization) {
+        if(company.containsKey(organization.getOrganizationName())) {
+            throw new EmployeeAlreadyExistsException("This employee allready exists in the company!");
         }
-        company[companySpace] = employees;
-        companySpace++;
+        company.put(organization.getOrganizationName(), organization);
+    }
+
+    public void addUser(LibraryUser user) {
+        if(users.containsKey(user.getId())){
+            throw new UserAllreadyExistsException("User with this ID allready exists in database!");
+        }
+        users.put(user.getId(), user);
     }
 
     public boolean removeEmployee(Company comp) {
-        final int notFound = -1;
-        int found = notFound;
-        int i = 0;
-
-        while(i < companySpace && found == notFound) {
-            if(comp.equals(company[i])) {
-                found = i;
-            } else {
-                i++;
-            }
+        if(company.containsValue(comp)){
+            company.remove(comp.getOrganizationName());
+            return true;
         }
 
-        if(found != notFound){
-            System.arraycopy(company, found +1, company, found, company.length - found -1);
-            companySpace--;
-            company[companySpace] = null;
-        }
-
-        return found != notFound;
+        return false;
     }
 }

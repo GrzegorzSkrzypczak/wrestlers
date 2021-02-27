@@ -1,17 +1,11 @@
 package pl.grzegorz.wrestlers.app;
 
-import pl.grzegorz.wrestlers.exceptions.DataExportException;
-import pl.grzegorz.wrestlers.exceptions.DataImportException;
-import pl.grzegorz.wrestlers.exceptions.InvalidDataException;
-import pl.grzegorz.wrestlers.exceptions.NoSuchOptionException;
+import pl.grzegorz.wrestlers.exceptions.*;
 import pl.grzegorz.wrestlers.io.ConsolePrinter;
 import pl.grzegorz.wrestlers.io.DataReader;
 import pl.grzegorz.wrestlers.io.file.FileMenager;
 import pl.grzegorz.wrestlers.io.file.FileMenagerBuilder;
-import pl.grzegorz.wrestlers.model.Company;
-import pl.grzegorz.wrestlers.model.Referees;
-import pl.grzegorz.wrestlers.model.Wrestlers;
-import pl.grzegorz.wrestlers.model.WrestlersLibrary;
+import pl.grzegorz.wrestlers.model.*;
 
 import java.util.InputMismatchException;
 
@@ -34,7 +28,7 @@ public class WrestlersController {
         }
     }
 
-    void control() {
+     void control() {
         Options option;
 
         do {
@@ -62,12 +56,31 @@ public class WrestlersController {
                 case EXIT:
                     exit();
                     break;
+                case ADD_USER:
+                    addUser();
+                    break;
+                case PRINT_USERS:
+                    printUsers();
+                    break;
                 default:
                     printer.printLine("Nie ma takiej opcji, wybierz ponownie!");
             }
         } while (option != Options.EXIT);
     }
 
+    private void addUser() {
+        LibraryUser user = dataReader.createUser();
+        try {
+            wrestlersLibrary.addUser(user);
+        } catch (UserAllreadyExistsException e) {
+            printer.printLine(e.getMessage());
+        }
+    }
+
+    public void printUsers(){
+        printer.printUsers(wrestlersLibrary.getUsers().values());
+
+    }
 
     private Options getOption() {
         boolean optionOk = false;
@@ -140,13 +153,11 @@ public class WrestlersController {
     }
 
     private void printWrestlers() {
-        Company[] wrestlers = wrestlersLibrary.getCompany();
-        printer.printWrestlers(wrestlers);
+        printer.printWrestlers(wrestlersLibrary.getCompany().values());
     }
 
     private void printReferees() {
-        Company[] referees = wrestlersLibrary.getCompany();
-        printer.printReferee(referees);
+        printer.printReferee(wrestlersLibrary.getCompany().values());
     }
 
 
@@ -169,7 +180,9 @@ public class WrestlersController {
         PRINT_WRESTLER(3, "Wyświetl wrestlerów"),
         PRINT_REFEREE(4, "WYświetl sędziów"),
         DELATE_WRESTLER(5, "Usuń Wrestlera"),
-        DELATE_REFEREE(6, "Usuń sędziego");
+        DELATE_REFEREE(6, "Usuń sędziego"),
+        ADD_USER(7,"Dodaj użytkownika"),
+        PRINT_USERS(8,"Wyświetl użytkowników");
 
         private int value;
         private String description;
