@@ -4,16 +4,15 @@ import pl.grzegorz.wrestlers.exceptions.EmployeeAlreadyExistsException;
 import pl.grzegorz.wrestlers.exceptions.UserAllreadyExistsException;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class WrestlersLibrary implements Serializable {
 
-    private Map<String, Company> company = new HashMap<>();
+    private Map<String, Organization> company = new HashMap<>();
     private Map<Integer, LibraryUser> users = new HashMap<>();
 
-    public Map<String, Company> getCompany() {
+    public Map<String, Organization> getCompany() {
         return company;
     }
 
@@ -22,11 +21,11 @@ public class WrestlersLibrary implements Serializable {
     }
 
 
-    public void addEmployees(Company organization) {
-        if(company.containsKey(organization.getOrganizationName())) {
+    public void addEmployees(Organization organization) {
+        if(company.containsKey(organization.getOrganizationFullName())) {
             throw new EmployeeAlreadyExistsException("This employee allready exists in the company!");
         }
-        company.put(organization.getOrganizationName(), organization);
+        company.put(organization.getOrganizationFullName(), organization);
     }
 
     public void addUser(LibraryUser user) {
@@ -36,9 +35,9 @@ public class WrestlersLibrary implements Serializable {
         users.put(user.getId(), user);
     }
 
-    public boolean removeEmployee(Company comp) {
+    public boolean removeEmployee(Organization comp) {
         if(company.containsValue(comp)){
-            company.remove(comp.getOrganizationName());
+            company.remove(comp.getOrganizationFullName());
             return true;
         }
 

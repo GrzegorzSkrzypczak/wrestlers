@@ -35,32 +35,32 @@ public class WrestlersController {
             printOptions();
             option = getOption();
             switch (option) {
-                case ADD_WRESTLER:
-                    addWrestler();
+                case ADD_MALE_WRESTLER:
+                    addMaleWrestler();
                     break;
-                case ADD_REFEREE:
-                    addReferee();
+                case ADD_FEMALE_REFEREE:
+                    addFemaleReferee();
                     break;
-                case PRINT_WRESTLER:
-                    printWrestlers();
+                case PRINT_MALE_WRESTLER:
+                    printMaleWrestlers();
                     break;
-                case PRINT_REFEREE:
-                    printReferees();
+                case PRINT_FEMALE_REFEREE:
+                    printFemaleWrestlers();
                     break;
-                case DELATE_WRESTLER:
-                    delateWrestler();
+                case DELATE_MALE_WRESTLER:
+                    delateMaleWrestler();
                     break;
-                case DELATE_REFEREE:
-                    delateReferee();
-                    break;
-                case EXIT:
-                    exit();
+                case DELATE_FEMALE_WRESTLER:
+                    delateFemaleWrestler();
                     break;
                 case ADD_USER:
                     addUser();
                     break;
                 case PRINT_USERS:
                     printUsers();
+                    break;
+                case EXIT:
+                    exit();
                     break;
                 default:
                     printer.printLine("Nie ma takiej opcji, wybierz ponownie!");
@@ -106,9 +106,9 @@ public class WrestlersController {
         }
     }
 
-    private void addWrestler() {
+    private void addMaleWrestler() {
         try {
-            Wrestlers wrestler = dataReader.readAndCreateWrestler();
+            MaleWrestlers wrestler = dataReader.readAndCreateMaleWrestler();
             wrestlersLibrary.addEmployees(wrestler);
         } catch (InputMismatchException e) {
             printer.printLine("Nie udało się dodać wrestlera, spróbuj ponownie!");
@@ -117,9 +117,9 @@ public class WrestlersController {
         }
     }
 
-    private void delateWrestler() {
+    private void delateMaleWrestler() {
         try {
-        Wrestlers wrestlers = dataReader.readAndCreateWrestler();
+        MaleWrestlers wrestlers = dataReader.readAndCreateMaleWrestler();
         if(wrestlersLibrary.removeEmployee(wrestlers))
             printer.printLine("Usunięto wrestlera");
         else
@@ -129,34 +129,34 @@ public class WrestlersController {
         }
     }
 
-    private void addReferee() {
+    private void addFemaleReferee() {
         try {
-            Referees referees = dataReader.readAndCreateReferees();
+            FemaleWrestlers referees = dataReader.readAndCreateFemaleWrestler();
             wrestlersLibrary.addEmployees(referees);
         } catch (InputMismatchException e) {
-            printer.printLine("Nie udało się dodać sędziego, spróbuj ponownie!");
+            printer.printLine("Nie udało się dodać wrestlerki, spróbuj ponownie!");
         } catch (ArrayIndexOutOfBoundsException e) {
-            printer.printLine("Brak miejsca na zapis sędziego!");
+            printer.printLine("Brak miejsca na zapis wrestlerki!");
         }
     }
 
-    private void delateReferee() {
+    private void delateFemaleWrestler() {
         try {
-            Referees referees = dataReader.readAndCreateReferees();
+            FemaleWrestlers referees = dataReader.readAndCreateFemaleWrestler();
             if (wrestlersLibrary.removeEmployee(referees))
-                printer.printLine("Usunięto sędziego");
+                printer.printLine("Usunięto wrestlerkę");
             else
-                printer.printLine("Brak takiego sędziego!");
+                printer.printLine("Brak takiej wrestlerki!");
         } catch(InputMismatchException e) {
-            printer.printLine("Nie udało się usunąć sędziego, niepoprawne dane!");
+            printer.printLine("Nie udało się usunąć wrestlerki, niepoprawne dane!");
         }
     }
 
-    private void printWrestlers() {
+    private void printMaleWrestlers() {
         printer.printWrestlers(wrestlersLibrary.getCompany().values());
     }
 
-    private void printReferees() {
+    private void printFemaleWrestlers() {
         printer.printReferee(wrestlersLibrary.getCompany().values());
     }
 
@@ -174,15 +174,15 @@ public class WrestlersController {
 
     private enum Options {
 
-        EXIT(0, "Wyjście z programu"),
-        ADD_WRESTLER(1, "Dodaj wrestlera"),
-        ADD_REFEREE(2, "Dodaj sędziego"),
-        PRINT_WRESTLER(3, "Wyświetl wrestlerów"),
-        PRINT_REFEREE(4, "WYświetl sędziów"),
-        DELATE_WRESTLER(5, "Usuń Wrestlera"),
-        DELATE_REFEREE(6, "Usuń sędziego"),
-        ADD_USER(7,"Dodaj użytkownika"),
-        PRINT_USERS(8,"Wyświetl użytkowników");
+        ADD_MALE_WRESTLER(0, "Dodaj wrestlera"),
+        ADD_FEMALE_REFEREE(1, "Dodaj wrestlerkę"),
+        PRINT_MALE_WRESTLER(2, "Wyświetl wrestlerów"),
+        PRINT_FEMALE_REFEREE(3, "WYświetl wrestlerki"),
+        DELATE_MALE_WRESTLER(4, "Usuń wrestlera"),
+        DELATE_FEMALE_WRESTLER(5, "Usuń wrestlerkę"),
+        ADD_USER(6,"Dodaj użytkownika"),
+        PRINT_USERS(7,"Wyświetl użytkowników"),
+        EXIT(8, "Wyjście z programu");
 
         private int value;
         private String description;

@@ -6,8 +6,8 @@ import java.util.Objects;
 
 public class LibraryUser extends User{
 
-    private List<Company> companyHistory = new ArrayList<>();
-    private List<Company> talentExchange = new ArrayList<>();
+    private List<Organization> wrestlersDatabase = new ArrayList<>();
+    private List<Organization> operationsOnDatabase = new ArrayList<>();
 
     public LibraryUser(int id, String name, String lastName) {
         super(id, name, lastName);
@@ -18,26 +18,26 @@ public class LibraryUser extends User{
         return getId() + ";" + getName() + ";" + getLastName();
     }
 
-    public List<Company> getCompanyHistory() {
-        return companyHistory;
+    public List<Organization> getWrestlersDatabase() {
+        return wrestlersDatabase;
     }
 
-    public List<Company> getTalentExchange() {
-        return talentExchange;
+    public List<Organization> getOperationsOnDatabase() {
+        return operationsOnDatabase;
     }
 
-    public void addToCompany(Company company){
-        companyHistory.add(company);
+    public void addToCompany(Organization company){
+        wrestlersDatabase.add(company);
     }
 
-    public void exchangeTalent(Company company) {
-        talentExchange.add(company);
+    public void exchangeTalent(Organization company) {
+        operationsOnDatabase.add(company);
     }
 
-    public boolean returnEmployeeStatus (Company employee) {
+    public boolean returnEmployeeStatus (Organization employee) {
         boolean result = false;
-        if(talentExchange.contains(employee)) {
-            talentExchange.remove(employee);
+        if(operationsOnDatabase.contains(employee)) {
+            operationsOnDatabase.remove(employee);
             addToCompany(employee);
             result = true;
         }
@@ -50,11 +50,11 @@ public class LibraryUser extends User{
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         LibraryUser that = (LibraryUser) o;
-        return Objects.equals(companyHistory, that.companyHistory) && Objects.equals(talentExchange, that.talentExchange);
+        return Objects.equals(wrestlersDatabase, that.wrestlersDatabase) && Objects.equals(operationsOnDatabase, that.operationsOnDatabase);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), companyHistory, talentExchange);
+        return Objects.hash(super.hashCode(), wrestlersDatabase, operationsOnDatabase);
     }
 }

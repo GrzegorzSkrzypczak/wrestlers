@@ -1,18 +1,18 @@
 package pl.grzegorz.wrestlers.io;
 
-import pl.grzegorz.wrestlers.model.Company;
+import pl.grzegorz.wrestlers.model.Organization;
 import pl.grzegorz.wrestlers.model.LibraryUser;
-import pl.grzegorz.wrestlers.model.Referees;
-import pl.grzegorz.wrestlers.model.Wrestlers;
+import pl.grzegorz.wrestlers.model.FemaleWrestlers;
+import pl.grzegorz.wrestlers.model.MaleWrestlers;
 
 import java.util.Collection;
 
 public class ConsolePrinter {
 
-    public void printWrestlers(Collection<Company> printWrestlers) {
+    public void printWrestlers(Collection<Organization> printWrestlers) {
         int countWrestlers = 0;
-        for (Company wrestlers : printWrestlers) {
-            if (wrestlers instanceof Wrestlers) {
+        for (Organization wrestlers : printWrestlers) {
+            if (wrestlers instanceof MaleWrestlers) {
                 printLine(wrestlers.toString());
                 countWrestlers++;
             }
@@ -22,10 +22,10 @@ public class ConsolePrinter {
         }
     }
 
-    public void printReferee(Collection<Company> printReferees) {
+    public void printReferee(Collection<Organization> printReferees) {
         int countReferees = 0;
-        for (Company referees : printReferees) {
-            if (referees instanceof Referees) {
+        for (Organization referees : printReferees) {
+            if (referees instanceof FemaleWrestlers) {
                 printLine(referees.toString());
                 countReferees++;
             }

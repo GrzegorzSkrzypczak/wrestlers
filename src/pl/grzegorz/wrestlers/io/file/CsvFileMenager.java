@@ -7,12 +7,11 @@ import pl.grzegorz.wrestlers.model.*;
 
 import java.io.*;
 import java.util.Collection;
-import java.util.Map;
 import java.util.Scanner;
 
 public class CsvFileMenager implements FileMenager {
 
-    private static final String FILE_NAME = "WrestlingLibrary.csv";
+    private static final String WRESTLERS_FILE_NAME = "Wrestlers.csv";
     private static final String USERS_FILE_NAME = "Users.csv";
 
     @Override
@@ -44,46 +43,53 @@ public class CsvFileMenager implements FileMenager {
     }
 
     private void inportCompany(WrestlersLibrary library) {
-        try (Scanner fileReader = new Scanner(new File(FILE_NAME))) {
+        try (Scanner fileReader = new Scanner(new File(WRESTLERS_FILE_NAME))) {
             while(fileReader.hasNext()) {
                 String nextLine = fileReader.nextLine();
-                Company employee = createObjectFromString(nextLine);
+                Organization employee = createObjectFromString(nextLine);
                 library.addEmployees(employee);
             }
         } catch (FileNotFoundException e) {
-            throw new DataImportException("Brak pliku " + FILE_NAME);
+            throw new DataImportException("Brak pliku " + WRESTLERS_FILE_NAME);
         }
     }
 
-    private Company createObjectFromString(String nextLine) {
+    private Organization createObjectFromString(String nextLine) {
         String[] split = nextLine.split(";");
         String type = split[0];
-        if(Wrestlers.TYPE.equals(type)) {
-            return createWretler(split);
-        } else if (Referees.TYPE.equals(type)) {
-            return createReferee(split);
+        if(MaleWrestlers.TYPE.equals(type)) {
+            return createMaleWretler(split);
+        } else if (FemaleWrestlers.TYPE.equals(type)) {
+            return createFemaleWrestler(split);
         }
         throw new InvalidDataException("Nieznany typ publikacji " + type);
 
     }
 
-    private Company createWretler(String[] wrestler) {
-        String organizationName = wrestler[1];
-        String wrestlingName = wrestler[2];
-        int age = Integer.valueOf(wrestler[3]);
-        boolean champion = Boolean.valueOf(wrestler[4]);
-        String title = wrestler[5];
-        return new Wrestlers(organizationName,wrestlingName,age,champion,title);
+    private Organization createMaleWretler(String[] wrestler) {
+        String organizationName = wrestler[0];
+        String organizationShortName = wrestler[1];
+        String tvShow = wrestler[2];
+        String wrestlingName = wrestler[3];
+        String realName = wrestler[4];
+        int age = Integer.parseInt(wrestler[5]);
+        String championschipTitle = wrestler[6];
+        int timesAsChampion = Integer.parseInt(wrestler[7]);
+        return new MaleWrestlers(organizationName,organizationShortName,tvShow,
+                wrestlingName,realName,age,championschipTitle,timesAsChampion);
     }
 
-    private Company createReferee(String[] referee) {
-        String organizationName = referee[1];
-        String wrestlingName = referee[2];
-        int age = Integer.valueOf(referee[3]);
-        int yearsInCompany = Integer.valueOf(referee[4]);
-        String gender = referee[5];
-        String brand = referee[6];
-        return new Referees(organizationName,wrestlingName,age,yearsInCompany,gender,brand);
+    private Organization createFemaleWrestler(String[] wrestler) {
+        String organizationName = wrestler[0];
+        String organizationShortName = wrestler[1];
+        String tvShow = wrestler[2];
+        String wrestlingName = wrestler[3];
+        String realName = wrestler[4];
+        int age = Integer.parseInt(wrestler[5]);
+        String championschipTitle = wrestler[6];
+        int timesAsChampion = Integer.parseInt(wrestler[7]);
+        return new FemaleWrestlers(organizationName,organizationShortName,tvShow,
+                wrestlingName,realName,age,championschipTitle,timesAsChampion);
     }
 
     @Override
@@ -94,16 +100,16 @@ public class CsvFileMenager implements FileMenager {
     }
 
     public void exportWrestlers(WrestlersLibrary library){
-        Collection<Company> employees = library.getCompany().values();
+        Collection<Organization> employees = library.getCompany().values();
         try (
-                FileWriter fileWriter = new FileWriter(FILE_NAME);
+                FileWriter fileWriter = new FileWriter(WRESTLERS_FILE_NAME);
                 BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
-            for (Company employee : employees) {
+            for (Organization employee : employees) {
                 bufferedWriter.write(employee.toCsv());
                 bufferedWriter.newLine();
             }
         } catch (IOException e) {
-            throw new DataExportException("Błąd zapisu danych do pliku " + FILE_NAME);
+            throw new DataExportException("Błąd zapisu danych do pliku " + WRESTLERS_FILE_NAME);
         }
     }
 

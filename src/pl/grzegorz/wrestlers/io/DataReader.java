@@ -1,8 +1,8 @@
 package pl.grzegorz.wrestlers.io;
 
 import pl.grzegorz.wrestlers.model.LibraryUser;
-import pl.grzegorz.wrestlers.model.Referees;
-import pl.grzegorz.wrestlers.model.Wrestlers;
+import pl.grzegorz.wrestlers.model.FemaleWrestlers;
+import pl.grzegorz.wrestlers.model.MaleWrestlers;
 import java.util.Scanner;
 
 public class DataReader {
@@ -13,37 +13,48 @@ public class DataReader {
         this.printer = printer;
     }
 
-    public Wrestlers readAndCreateWrestler() {
-        printer.printLine("Pseudonim:");
-        String name = scanner.nextLine();
-        printer.printLine("Organizacja: ");
-        String organization = scanner.nextLine();
+    public MaleWrestlers readAndCreateMaleWrestler() {
+        printer.printLine("Pełna nazwa organizacji:");
+        String organizationName = scanner.nextLine();
+        printer.printLine("Skrócona nazwa organizacji: ");
+        String organizationShortName = scanner.nextLine();
+        printer.printLine("Nazwa brandu na którym występuje wrestler: ");
+        String tvShow = scanner.nextLine();
+        printer.printLine("Pseudonim wrestlingowy: ");
+        String wrestlingName = scanner.nextLine();
+        printer.printLine("Prawdziwe imię i nazwisko: ");
+        String realName = scanner.nextLine();
         printer.printLine("Wiek: ");
         int age = getInt();
-        printer.printLine("Czy posiada pas: ");
-        boolean isAChampion = scanner.nextBoolean();
-        scanner.nextLine();
-        printer.printLine("Tytuł mistrzowski: ");
-        String championship = scanner.nextLine();
+        printer.printLine("Obeznie posiadany pas mistrzowski: ");
+        String championchip = scanner.nextLine();
+        printer.printLine("Mistrz federacji x: ");
+        int championTimes = getInt();
 
-        return new Wrestlers(name, organization, age, isAChampion, championship);
+        return new MaleWrestlers(organizationName,organizationShortName,tvShow
+        ,wrestlingName, realName, age, championchip, championTimes);
     }
 
-    public Referees readAndCreateReferees() {
-        printer.printLine("Imię i nazwisko :");
-        String name = scanner.nextLine();
-        printer.printLine("Organizacja: ");
-        String organization = scanner.nextLine();
+    public FemaleWrestlers readAndCreateFemaleWrestler() {
+        printer.printLine("Pełna nazwa organizacji:");
+        String organizationName = scanner.nextLine();
+        printer.printLine("Skrócona nazwa organizacji: ");
+        String organizationShortName = scanner.nextLine();
+        printer.printLine("Nazwa brandu na którym występuje wrestlerka: ");
+        String tvShow = scanner.nextLine();
+        printer.printLine("Pseudonim wrestlingowy: ");
+        String wrestlingName = scanner.nextLine();
+        printer.printLine("Prawdziwe imię i nazwisko: ");
+        String realName = scanner.nextLine();
         printer.printLine("Wiek: ");
         int age = getInt();
-        printer.printLine("Staż w federacji: ");
-        int yearsInCompany = getInt();
-        printer.printLine("Przynależy do frakcji: ");
-        String brand = scanner.nextLine();
-        printer.printLine("Płęć: ");
-        String gender = scanner.nextLine();
+        printer.printLine("Obeznie posiadany pas mistrzowski: ");
+        String championchip = scanner.nextLine();
+        printer.printLine("Mistrzyni federacji x: ");
+        int championTimes = getInt();
 
-        return new Referees(name, organization,age,yearsInCompany,brand,gender);
+        return new FemaleWrestlers(organizationName,organizationShortName,tvShow
+                ,wrestlingName, realName, age, championchip, championTimes);
     }
 
     public LibraryUser createUser(){
