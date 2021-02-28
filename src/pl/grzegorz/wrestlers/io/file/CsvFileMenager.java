@@ -67,27 +67,27 @@ public class CsvFileMenager implements FileMenager {
     }
 
     private Organization createMaleWretler(String[] wrestler) {
-        String organizationName = wrestler[0];
-        String organizationShortName = wrestler[1];
-        String tvShow = wrestler[2];
-        String wrestlingName = wrestler[3];
-        String realName = wrestler[4];
-        int age = Integer.parseInt(wrestler[5]);
-        String championschipTitle = wrestler[6];
-        int timesAsChampion = Integer.parseInt(wrestler[7]);
+        String organizationName = wrestler[1];
+        String organizationShortName = wrestler[2];
+        String tvShow = wrestler[3];
+        String wrestlingName = wrestler[4];
+        String realName = wrestler[5];
+        int age = Integer.parseInt(wrestler[6]);
+        String championschipTitle = wrestler[7];
+        int timesAsChampion = Integer.parseInt(wrestler[8]);
         return new MaleWrestlers(organizationName,organizationShortName,tvShow,
                 wrestlingName,realName,age,championschipTitle,timesAsChampion);
     }
 
     private Organization createFemaleWrestler(String[] wrestler) {
-        String organizationName = wrestler[0];
-        String organizationShortName = wrestler[1];
-        String tvShow = wrestler[2];
-        String wrestlingName = wrestler[3];
-        String realName = wrestler[4];
-        int age = Integer.parseInt(wrestler[5]);
-        String championschipTitle = wrestler[6];
-        int timesAsChampion = Integer.parseInt(wrestler[7]);
+        String organizationName = wrestler[1];
+        String organizationShortName = wrestler[2];
+        String tvShow = wrestler[3];
+        String wrestlingName = wrestler[4];
+        String realName = wrestler[5];
+        int age = Integer.parseInt(wrestler[6]);
+        String championschipTitle = wrestler[7];
+        int timesAsChampion = Integer.parseInt(wrestler[8]);
         return new FemaleWrestlers(organizationName,organizationShortName,tvShow,
                 wrestlingName,realName,age,championschipTitle,timesAsChampion);
     }
