@@ -109,7 +109,7 @@ public class WrestlersController {
     private void addMaleWrestler() {
         try {
             MaleWrestlers wrestler = dataReader.readAndCreateMaleWrestler();
-            wrestlersLibrary.addEmployees(wrestler);
+            wrestlersLibrary.addWrestlers(wrestler);
         } catch (InputMismatchException e) {
             printer.printLine("Nie udało się dodać wrestlera, spróbuj ponownie!");
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -120,7 +120,7 @@ public class WrestlersController {
     private void delateMaleWrestler() {
         try {
         MaleWrestlers wrestlers = dataReader.readAndCreateMaleWrestler();
-        if(wrestlersLibrary.removeEmployee(wrestlers))
+        if(wrestlersLibrary.removeWrestler(wrestlers))
             printer.printLine("Usunięto wrestlera");
         else
             printer.printLine("Brak takiego wrestlera!");
@@ -132,7 +132,7 @@ public class WrestlersController {
     private void addFemaleReferee() {
         try {
             FemaleWrestlers referees = dataReader.readAndCreateFemaleWrestler();
-            wrestlersLibrary.addEmployees(referees);
+            wrestlersLibrary.addWrestlers(referees);
         } catch (InputMismatchException e) {
             printer.printLine("Nie udało się dodać wrestlerki, spróbuj ponownie!");
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -143,7 +143,7 @@ public class WrestlersController {
     private void delateFemaleWrestler() {
         try {
             FemaleWrestlers referees = dataReader.readAndCreateFemaleWrestler();
-            if (wrestlersLibrary.removeEmployee(referees))
+            if (wrestlersLibrary.removeWrestler(referees))
                 printer.printLine("Usunięto wrestlerkę");
             else
                 printer.printLine("Brak takiej wrestlerki!");

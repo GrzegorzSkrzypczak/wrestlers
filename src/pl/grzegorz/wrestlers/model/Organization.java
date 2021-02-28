@@ -5,6 +5,7 @@ import java.util.Objects;
 
 public abstract class Organization implements Serializable {
 
+    private int rank;
     private String organizationFullName;
     private String ogranizationShortName;
     private String championshitTitle;
@@ -14,7 +15,8 @@ public abstract class Organization implements Serializable {
     public Organization() {
     }
 
-    public Organization(String organizationName, String shortName, String title, String show) {
+    public Organization(int rank, String organizationName, String shortName, String title, String show) {
+        this.rank = rank;
         this.organizationFullName = organizationName;
         this.ogranizationShortName = shortName;
         this.championshitTitle = title;
@@ -28,6 +30,14 @@ public abstract class Organization implements Serializable {
 
     public void setOrganizationFullName(String organizationFullName) {
         this.organizationFullName = organizationFullName;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
     }
 
     public String getOgranizationShortName() {
@@ -52,7 +62,7 @@ public abstract class Organization implements Serializable {
 
     @Override
     public String toString() {
-        return "Organizacja: "
+        return  "Ranga (ptk): " + rank + ", "
                 + " pełna nazwa organizacji: " + organizationFullName + ", "
                 + " skrócona nazwa organizacji: " + ogranizationShortName + ", "
                 + " pas mistrzowski: " + championshitTitle
@@ -66,14 +76,11 @@ public abstract class Organization implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Organization that = (Organization) o;
-        return Objects.equals(organizationFullName, that.organizationFullName)
-                && Objects.equals(ogranizationShortName, that.ogranizationShortName)
-                && Objects.equals(championshitTitle, that.championshitTitle)
-                && Objects.equals(tvShow, that.tvShow);
+        return rank == that.rank && Objects.equals(organizationFullName, that.organizationFullName) && Objects.equals(ogranizationShortName, that.ogranizationShortName) && Objects.equals(championshitTitle, that.championshitTitle) && Objects.equals(tvShow, that.tvShow);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(organizationFullName, ogranizationShortName, championshitTitle, tvShow);
+        return Objects.hash(rank, organizationFullName, ogranizationShortName, championshitTitle, tvShow);
     }
 }

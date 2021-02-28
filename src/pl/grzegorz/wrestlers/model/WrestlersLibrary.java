@@ -9,23 +9,23 @@ import java.util.Map;
 
 public class WrestlersLibrary implements Serializable {
 
-    private Map<String, Organization> company = new HashMap<>();
+    private Map<Integer, Organization> company = new HashMap<>();
     private Map<Integer, LibraryUser> users = new HashMap<>();
 
-    public Map<String, Organization> getCompany() {
+    public Map<Integer, Organization> getCompany() {
         return company;
     }
-
     public Map<Integer, LibraryUser> getUsers() {
         return users;
     }
 
 
-    public void addEmployees(Organization organization) {
-        if(company.containsKey(organization.getOrganizationFullName())) {
+    public void addWrestlers(Organization organization) {
+
+        if(company.containsKey(organization.getRank())) {
             throw new EmployeeAlreadyExistsException("This employee allready exists in the company!");
         }
-        company.put(organization.getOrganizationFullName(), organization);
+        company.put(organization.getRank(), organization);
     }
 
     public void addUser(LibraryUser user) {
@@ -35,9 +35,9 @@ public class WrestlersLibrary implements Serializable {
         users.put(user.getId(), user);
     }
 
-    public boolean removeEmployee(Organization comp) {
+    public boolean removeWrestler(Organization comp) {
         if(company.containsValue(comp)){
-            company.remove(comp.getOrganizationFullName());
+            company.remove(comp.getRank());
             return true;
         }
 

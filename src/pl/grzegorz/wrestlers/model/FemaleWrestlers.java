@@ -10,10 +10,16 @@ public class FemaleWrestlers extends Organization {
     private int age;
     private int howManyMainTitleReigns;
 
-    public FemaleWrestlers(String organizationName,
-                           String ogranizationShortName, String tvShow,
-                           String wrestlingName, String realName, int age, String championschipTitle, int titleReigns) {
-        super(organizationName, ogranizationShortName, championschipTitle, tvShow);
+    public FemaleWrestlers(int rank
+            , String organizationName
+            , String ogranizationShortName
+            , String tvShow
+            , String wrestlingName
+            , String realName
+            , int age
+            , String championschipTitle
+            , int titleReigns) {
+        super(rank, organizationName, ogranizationShortName, championschipTitle, tvShow);
         this.wrestlingName = wrestlingName;
         this.realName =realName;
         this.age = age;
@@ -65,6 +71,7 @@ public class FemaleWrestlers extends Organization {
     @Override
     public String toCsv() {
         return TYPE + ";"
+                + getRank() + ";"
                 + getOrganizationFullName() + ";"
                 + getOgranizationShortName() + ";"
                 + getTvShow() + ";"
@@ -81,13 +88,12 @@ public class FemaleWrestlers extends Organization {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         FemaleWrestlers that = (FemaleWrestlers) o;
-        return age == that.age && howManyMainTitleReigns == that.howManyMainTitleReigns
-                && Objects.equals(wrestlingName, that.wrestlingName)
-                && Objects.equals(realName, that.realName);
+        return age == that.age && howManyMainTitleReigns == that.howManyMainTitleReigns && Objects.equals(wrestlingName, that.wrestlingName) && Objects.equals(realName, that.realName);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), wrestlingName, realName, age, howManyMainTitleReigns);
+
     }
 }

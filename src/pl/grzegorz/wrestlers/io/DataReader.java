@@ -14,6 +14,8 @@ public class DataReader {
     }
 
     public MaleWrestlers readAndCreateMaleWrestler() {
+        printer.printLine("Podaj range wrestlera: ");
+        int rank = getInt();
         printer.printLine("Pełna nazwa organizacji:");
         String organizationName = scanner.nextLine();
         printer.printLine("Skrócona nazwa organizacji: ");
@@ -26,16 +28,18 @@ public class DataReader {
         String realName = scanner.nextLine();
         printer.printLine("Wiek: ");
         int age = getInt();
-        printer.printLine("Obeznie posiadany pas mistrzowski: ");
+        printer.printLine("Obecnie posiadany pas mistrzowski: ");
         String championchip = scanner.nextLine();
         printer.printLine("Mistrz federacji x: ");
         int championTimes = getInt();
 
-        return new MaleWrestlers(organizationName,organizationShortName,tvShow
+        return new MaleWrestlers(rank, organizationName,organizationShortName,tvShow
         ,wrestlingName, realName, age, championchip, championTimes);
     }
 
     public FemaleWrestlers readAndCreateFemaleWrestler() {
+        printer.printLine("Podaj range wrestlerki: ");
+        int rank = getInt();
         printer.printLine("Pełna nazwa organizacji:");
         String organizationName = scanner.nextLine();
         printer.printLine("Skrócona nazwa organizacji: ");
@@ -48,12 +52,12 @@ public class DataReader {
         String realName = scanner.nextLine();
         printer.printLine("Wiek: ");
         int age = getInt();
-        printer.printLine("Obeznie posiadany pas mistrzowski: ");
+        printer.printLine("Obecnie posiadany pas mistrzowski: ");
         String championchip = scanner.nextLine();
         printer.printLine("Mistrzyni federacji x: ");
         int championTimes = getInt();
 
-        return new FemaleWrestlers(organizationName,organizationShortName,tvShow
+        return new FemaleWrestlers(rank, organizationName,organizationShortName,tvShow
                 ,wrestlingName, realName, age, championchip, championTimes);
     }
 

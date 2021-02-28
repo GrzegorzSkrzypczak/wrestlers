@@ -36,7 +36,7 @@ public class CsvFileMenager implements FileMenager {
 
     private LibraryUser createUserFromString(String csvTxt) {
         String[] split = csvTxt.split(";");
-        int id = Integer.valueOf(split[0]);
+        int id = Integer.parseInt(split[0]);
         String name = split[1];
         String lastName = split[2];
         return new LibraryUser(id, name, lastName);
@@ -47,7 +47,7 @@ public class CsvFileMenager implements FileMenager {
             while(fileReader.hasNext()) {
                 String nextLine = fileReader.nextLine();
                 Organization employee = createObjectFromString(nextLine);
-                library.addEmployees(employee);
+                library.addWrestlers(employee);
             }
         } catch (FileNotFoundException e) {
             throw new DataImportException("Brak pliku " + WRESTLERS_FILE_NAME);
@@ -67,28 +67,30 @@ public class CsvFileMenager implements FileMenager {
     }
 
     private Organization createMaleWretler(String[] wrestler) {
-        String organizationName = wrestler[1];
-        String organizationShortName = wrestler[2];
-        String tvShow = wrestler[3];
-        String wrestlingName = wrestler[4];
-        String realName = wrestler[5];
-        int age = Integer.parseInt(wrestler[6]);
-        String championschipTitle = wrestler[7];
-        int timesAsChampion = Integer.parseInt(wrestler[8]);
-        return new MaleWrestlers(organizationName,organizationShortName,tvShow,
+        int rank = Integer.parseInt(wrestler[1]);
+        String organizationName = wrestler[2];
+        String organizationShortName = wrestler[3];
+        String tvShow = wrestler[4];
+        String wrestlingName = wrestler[5];
+        String realName = wrestler[6];
+        int age = Integer.parseInt(wrestler[7]);
+        String championschipTitle = wrestler[8];
+        int timesAsChampion = Integer.parseInt(wrestler[9]);
+        return new MaleWrestlers(rank,organizationName,organizationShortName,tvShow,
                 wrestlingName,realName,age,championschipTitle,timesAsChampion);
     }
 
     private Organization createFemaleWrestler(String[] wrestler) {
-        String organizationName = wrestler[1];
-        String organizationShortName = wrestler[2];
-        String tvShow = wrestler[3];
-        String wrestlingName = wrestler[4];
-        String realName = wrestler[5];
-        int age = Integer.parseInt(wrestler[6]);
-        String championschipTitle = wrestler[7];
-        int timesAsChampion = Integer.parseInt(wrestler[8]);
-        return new FemaleWrestlers(organizationName,organizationShortName,tvShow,
+        int rank = Integer.parseInt(wrestler[1]);
+        String organizationName = wrestler[2];
+        String organizationShortName = wrestler[3];
+        String tvShow = wrestler[4];
+        String wrestlingName = wrestler[5];
+        String realName = wrestler[6];
+        int age = Integer.parseInt(wrestler[7]);
+        String championschipTitle = wrestler[8];
+        int timesAsChampion = Integer.parseInt(wrestler[9]);
+        return new FemaleWrestlers(rank,organizationName,organizationShortName,tvShow,
                 wrestlingName,realName,age,championschipTitle,timesAsChampion);
     }
 

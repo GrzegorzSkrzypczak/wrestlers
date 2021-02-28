@@ -10,10 +10,10 @@ public class MaleWrestlers extends Organization {
     private int age;
     private int howManyMainTitleReigns;
 
-    public MaleWrestlers(String organizationName,
+    public MaleWrestlers(int rank, String organizationName,
                            String ogranizationShortName, String tvShow,
                            String wrestlingName, String realName, int age, String championschipTitle, int titleReigns) {
-        super(organizationName, ogranizationShortName, championschipTitle, tvShow);
+        super(rank, organizationName, ogranizationShortName, championschipTitle, tvShow);
         this.wrestlingName = wrestlingName;
         this.realName =realName;
         this.age = age;
@@ -65,6 +65,7 @@ public class MaleWrestlers extends Organization {
     @Override
     public String toCsv() {
         return TYPE + ";"
+                + getRank() + ";"
                 + getOrganizationFullName() + ";"
                 + getOgranizationShortName() + ";"
                 + getTvShow() + ";"
@@ -81,9 +82,7 @@ public class MaleWrestlers extends Organization {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         MaleWrestlers that = (MaleWrestlers) o;
-        return age == that.age && howManyMainTitleReigns == that.howManyMainTitleReigns
-                && Objects.equals(wrestlingName, that.wrestlingName)
-                && Objects.equals(realName, that.realName);
+        return age == that.age && howManyMainTitleReigns == that.howManyMainTitleReigns && Objects.equals(wrestlingName, that.wrestlingName) && Objects.equals(realName, that.realName);
     }
 
     @Override
