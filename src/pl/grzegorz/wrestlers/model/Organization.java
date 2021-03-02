@@ -3,7 +3,7 @@ package pl.grzegorz.wrestlers.model;
 import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class Organization implements Serializable, CsvConvertible{
+public abstract class Organization implements Serializable, Comparable<Organization>, CsvConvertible{
 
     private int rank;
     private String organizationFullName;
@@ -80,5 +80,10 @@ public abstract class Organization implements Serializable, CsvConvertible{
     @Override
     public int hashCode() {
         return Objects.hash(rank, organizationFullName, ogranizationShortName, championshitTitle, tvShow);
+    }
+
+    @Override
+    public int compareTo(Organization o) {
+        return Integer.compare(rank, o.rank);
     }
 }
