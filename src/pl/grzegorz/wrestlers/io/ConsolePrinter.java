@@ -31,7 +31,7 @@ public class ConsolePrinter {
             }
         }
         if (countReferees == 0) {
-            printLine("Brak sędziów w bibliotece");
+            printLine("Brak wrestlerek w bibliotece");
         }
     }
 
@@ -47,5 +47,4 @@ public class ConsolePrinter {
         System.out.println(text.toUpperCase());
     }
 
-    // TODO zmiana koncepcli + poprawić kolejnosc wyswietlania!
 }

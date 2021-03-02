@@ -3,7 +3,7 @@ package pl.grzegorz.wrestlers.model;
 import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class Organization implements Serializable {
+public abstract class Organization implements Serializable, CsvConvertible{
 
     private int rank;
     private String organizationFullName;
@@ -68,8 +68,6 @@ public abstract class Organization implements Serializable {
                 + " pas mistrzowski: " + championshitTitle
                 + " występuje na: " + tvShow;
     }
-
-    public abstract String toCsv();
 
     @Override
     public boolean equals(Object o) {
