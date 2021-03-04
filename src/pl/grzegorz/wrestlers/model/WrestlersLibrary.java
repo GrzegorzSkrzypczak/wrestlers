@@ -35,9 +35,9 @@ public class WrestlersLibrary implements Serializable {
         users.put(user.getId(), user);
     }
 
-    public boolean removeWrestler(Organization comp) {
-        if(company.containsValue(comp)){
-            company.remove(comp.getRank());
+    public boolean removeWrestler(Organization org) {
+        if(company.containsKey(org.getRank())) {
+            company.remove(org.getRank());
             return true;
         }
 
