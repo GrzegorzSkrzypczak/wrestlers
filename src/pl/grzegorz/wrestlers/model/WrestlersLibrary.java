@@ -23,14 +23,14 @@ public class WrestlersLibrary implements Serializable {
     public void addWrestlers(Organization organization) {
 
         if(company.containsKey(organization.getRank())) {
-            throw new EmployeeAlreadyExistsException("This employee allready exists in the company!");
+            throw new EmployeeAlreadyExistsException("Taki użytkownik już istnieje!");
         }
         company.put(organization.getRank(), organization);
     }
 
     public void addUser(LibraryUser user) {
         if(users.containsKey(user.getId())){
-            throw new UserAllreadyExistsException("User with this ID allready exists in database!");
+            throw new UserAllreadyExistsException("Użytkownik z takim ID już istnieje!");
         }
         users.put(user.getId(), user);
     }
