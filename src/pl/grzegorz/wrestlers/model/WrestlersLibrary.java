@@ -4,19 +4,38 @@ import pl.grzegorz.wrestlers.exceptions.EmployeeAlreadyExistsException;
 import pl.grzegorz.wrestlers.exceptions.UserAllreadyExistsException;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class WrestlersLibrary implements Serializable {
 
     private Map<Integer, Organization> company = new HashMap<>();
     private Map<Integer, LibraryUser> users = new HashMap<>();
 
+
     public Map<Integer, Organization> getCompany() {
         return company;
     }
+
+    public Collection<Organization> getSortedOrganizations(Comparator<Organization> comparator){
+        List<Organization> list = new ArrayList<>(company.values());
+        list.sort(comparator);
+        return list;
+    }
+
     public Map<Integer, LibraryUser> getUsers() {
         return users;
+    }
+
+    public Collection<User> getSortedUsers(Comparator<User> comparator){
+        List<User> list = new ArrayList<>(users.values());
+        list.sort(comparator);
+        return list;
+    }
+
+    public Collection<LibraryUser> getSortedLibraryUsers(Comparator<LibraryUser> comparator){
+        List<LibraryUser> list = new ArrayList<>(users.values());
+        list.sort(comparator);
+        return list;
     }
 
 

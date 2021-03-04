@@ -10,6 +10,7 @@ import pl.grzegorz.wrestlers.model.comparator.OrganizationComparator;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.InputMismatchException;
 
 public class WrestlersController {
@@ -81,7 +82,12 @@ public class WrestlersController {
     }
 
     public void printUsers(){
-        printer.printUsers(wrestlersLibrary.getUsers().values());
+        printer.printUsers(wrestlersLibrary.getSortedLibraryUsers(new Comparator<LibraryUser>() {
+            @Override
+            public int compare(LibraryUser o1, LibraryUser o2) {
+                return o1.getLastName().compareToIgnoreCase(o2.getLastName());
+            }
+        }));
 
     }
 
@@ -156,11 +162,11 @@ public class WrestlersController {
     }
 
     private void printMaleWrestlers() {
-        printer.printWrestlers(wrestlersLibrary.getCompany().values());
+        printer.printWrestlers(wrestlersLibrary.getSortedOrganizations(new OrganizationComparator()));
     }
 
     private void printFemaleWrestlers() {
-        printer.printReferee(wrestlersLibrary.getCompany().values());
+        printer.printReferee(wrestlersLibrary.getSortedOrganizations(new OrganizationComparator()));
     }
 
 
