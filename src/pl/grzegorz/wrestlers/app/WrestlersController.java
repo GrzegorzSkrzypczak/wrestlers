@@ -82,12 +82,10 @@ public class WrestlersController {
     }
 
     public void printUsers(){
-        printer.printUsers(wrestlersLibrary.getSortedLibraryUsers(new Comparator<LibraryUser>() {
-            @Override
-            public int compare(LibraryUser o1, LibraryUser o2) {
-                return o1.getLastName().compareToIgnoreCase(o2.getLastName());
-            }
-        }));
+        printer.printUsers(wrestlersLibrary
+                .getSortedLibraryUsers((o1, o2) -> o1
+                        .getLastName()
+                        .compareToIgnoreCase(o2.getLastName())));
 
     }
 
@@ -162,11 +160,14 @@ public class WrestlersController {
     }
 
     private void printMaleWrestlers() {
-        printer.printWrestlers(wrestlersLibrary.getSortedOrganizations(new OrganizationComparator()));
+        printer.printWrestlers(wrestlersLibrary
+                .getSortedOrganizations(
+                        (o1, o2) -> o1.getOrganizationFullName().compareToIgnoreCase(o2.getOrganizationFullName())));
     }
 
     private void printFemaleWrestlers() {
-        printer.printReferee(wrestlersLibrary.getSortedOrganizations(new OrganizationComparator()));
+        printer.printReferee(wrestlersLibrary.getSortedOrganizations(
+                (o1, o2) -> o1.getOrganizationFullName().compareToIgnoreCase(o2.getOrganizationFullName())));
     }
 
 
