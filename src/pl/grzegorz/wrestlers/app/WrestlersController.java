@@ -6,11 +6,7 @@ import pl.grzegorz.wrestlers.io.DataReader;
 import pl.grzegorz.wrestlers.io.file.FileMenager;
 import pl.grzegorz.wrestlers.io.file.FileMenagerBuilder;
 import pl.grzegorz.wrestlers.model.*;
-import pl.grzegorz.wrestlers.model.comparator.OrganizationComparator;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Comparator;
 import java.util.InputMismatchException;
 
 public class WrestlersController {
