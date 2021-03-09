@@ -32,7 +32,7 @@ public class WrestlersLibrary implements Serializable {
         return list;
     }
 
-    public Collection<LibraryUser> getSortedLibraryUsers(Comparator<LibraryUser> comparator){
+    public Collection<LibraryUser> getSortedLibraryUsers(Comparator<LibraryUser> comparator, Comparator<String> caseInsensitiveOrder){
         List<LibraryUser> list = new ArrayList<>(users.values());
         list.sort(comparator);
         return list;

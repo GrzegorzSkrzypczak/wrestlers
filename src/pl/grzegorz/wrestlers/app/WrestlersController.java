@@ -7,6 +7,7 @@ import pl.grzegorz.wrestlers.io.file.FileMenager;
 import pl.grzegorz.wrestlers.io.file.FileMenagerBuilder;
 import pl.grzegorz.wrestlers.model.*;
 
+import java.util.Comparator;
 import java.util.InputMismatchException;
 
 public class WrestlersController {
@@ -14,7 +15,7 @@ public class WrestlersController {
     private final ConsolePrinter printer = new ConsolePrinter();
     private final DataReader dataReader = new DataReader(printer);
     private WrestlersLibrary wrestlersLibrary;
-    private FileMenager fileMenager;
+    private final FileMenager fileMenager;
 
     WrestlersController() {
         fileMenager = new FileMenagerBuilder(printer, dataReader).build();
@@ -78,10 +79,11 @@ public class WrestlersController {
     }
 
     public void printUsers(){
-        printer.printUsers(wrestlersLibrary
-                .getSortedLibraryUsers((o1, o2) -> o1
-                        .getLastName()
-                        .compareToIgnoreCase(o2.getLastName())));
+        printer.printUsers(wrestlersLibrary.getSortedLibraryUsers(Comparator.comparing(User::getLastName)
+        , String.CASE_INSENSITIVE_ORDER));
+//                .getSortedLibraryUsers((o1, o2) -> o1
+//                        .getLastName()
+//                        .compareToIgnoreCase(o2.getLastName())));
 
     }
 
@@ -157,13 +159,14 @@ public class WrestlersController {
 
     private void printMaleWrestlers() {
         printer.printWrestlers(wrestlersLibrary
-                .getSortedOrganizations(
-                        (o1, o2) -> o1.getOrganizationFullName().compareToIgnoreCase(o2.getOrganizationFullName())));
+                .getSortedOrganizations(Comparator.comparing(Organization::getOrganizationFullName
+                        , String.CASE_INSENSITIVE_ORDER)));
     }
 
     private void printFemaleWrestlers() {
-        printer.printReferee(wrestlersLibrary.getSortedOrganizations(
-                (o1, o2) -> o1.getOrganizationFullName().compareToIgnoreCase(o2.getOrganizationFullName())));
+        printer.printReferee(wrestlersLibrary
+                .getSortedOrganizations(Comparator.comparing(Organization::getOrganizationFullName
+        , String.CASE_INSENSITIVE_ORDER)));
     }
 
 
