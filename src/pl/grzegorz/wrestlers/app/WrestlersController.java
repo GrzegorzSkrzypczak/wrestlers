@@ -164,7 +164,7 @@ public class WrestlersController {
     }
 
     private void printFemaleWrestlers() {
-        printer.printReferee(wrestlersLibrary
+        printer.printFemaleWrestlers(wrestlersLibrary
                 .getSortedOrganizations(Comparator.comparing(Organization::getOrganizationFullName
         , String.CASE_INSENSITIVE_ORDER)));
     }

@@ -22,9 +22,9 @@ public class ConsolePrinter {
         }
     }
 
-    public void printReferee(Collection<Organization> printReferees) {
+    public void printFemaleWrestlers(Collection<Organization> femaleWrestlers) {
         int countReferees = 0;
-        for (Organization referees : printReferees) {
+        for (Organization referees : femaleWrestlers) {
             if (referees instanceof FemaleWrestlers) {
                 printLine(referees.toString());
                 countReferees++;
