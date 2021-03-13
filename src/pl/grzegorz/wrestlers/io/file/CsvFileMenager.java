@@ -23,14 +23,14 @@ public class CsvFileMenager implements FileMenager {
     }
 
     private void importUsers(WrestlersLibrary employeeLibrary) {
-        try (Scanner fileReader = new Scanner(new File(USERS_FILE_NAME))) {
-            while(fileReader.hasNext()) {
-                String nextLine = fileReader.nextLine();
-                LibraryUser users = createUserFromString(nextLine);
-                employeeLibrary.addUser(users);
-            }
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(USERS_FILE_NAME))) {
+            bufferedReader.lines()
+                    .map(this::createUserFromString)
+                    .forEach(employeeLibrary::addUser);
         } catch (FileNotFoundException e) {
             throw new DataImportException("Brak pliku " + USERS_FILE_NAME);
+        } catch (IOException e) {
+            throw new DataImportException("Błąd odczytu pliku " + USERS_FILE_NAME);
         }
     }
 
@@ -43,14 +43,14 @@ public class CsvFileMenager implements FileMenager {
     }
 
     private void inportCompany(WrestlersLibrary library) {
-        try (Scanner fileReader = new Scanner(new File(WRESTLERS_FILE_NAME))) {
-            while(fileReader.hasNext()) {
-                String nextLine = fileReader.nextLine();
-                Organization employee = createObjectFromString(nextLine);
-                library.addWrestlers(employee);
-            }
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(WRESTLERS_FILE_NAME))) {
+            bufferedReader.lines()
+                    .map(this::createObjectFromString)
+                    .forEach(library::addWrestlers);
         } catch (FileNotFoundException e) {
             throw new DataImportException("Brak pliku " + WRESTLERS_FILE_NAME);
+        } catch (IOException e) {
+            throw new DataImportException("Bład odczytu pliku" + WRESTLERS_FILE_NAME);
         }
     }
 
